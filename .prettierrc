@@ -4,9 +4,5 @@
 	"tabWidth": 2,
 	"singleQuote": true,
 	"jsxSingleQuote": true,
-	"useTabs": true,
-	"plugins": ["@trivago/prettier-plugin-sort-imports"],
-	"importOrder": ["<THIRD_PARTY_MODULES>", "^@components", "^@pages", "^@utils", "^[./]"],
-	"importOrderSeparation": true,
-	"importOrderSortSpecifiers": true
+	"useTabs": true
 }

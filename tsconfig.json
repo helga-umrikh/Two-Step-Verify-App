@@ -27,17 +27,12 @@
       "@components/*": [
         "src/components/*"
       ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ]
     }
   },
   "include": [
     "src",
-    "vite-plugin-eslint.d.ts"
+    "vite-plugin-eslint.d.ts",
+    "declare.d.ts"
   ],
   "references": [
     {
