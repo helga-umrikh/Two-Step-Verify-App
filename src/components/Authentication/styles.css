@@ -1,0 +1,37 @@
+.auth-card {
+  width: 440px;
+  margin: 0 auto;
+  padding: 8px;
+  border: none;
+}
+
+
+.ant-input {
+  font-size: 24px;
+  font-weight: var(--ant-font-weight-strong);
+}
+
+@media(min-width: 768px) {
+  .ant-otp-input {
+    width: 53px !important;
+    height: 60px !important;
+  }
+
+  .ant-otp {
+    column-gap: 12px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-card {
+    width: 90% !important;
+  }
+
+  .ant-card-body {
+    padding: 8px !important;
+  }
+
+  .ant-input {
+    font-size: 16px;
+  }
+}

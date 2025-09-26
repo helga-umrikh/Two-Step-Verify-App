@@ -1,7 +1,11 @@
-import { StrictMode } from 'react';
-import { Root, createRoot } from 'react-dom/client';
+import React, { StrictMode } from 'react';
 
-import { App } from './App';
+import { ConfigProvider } from 'antd';
+import { createRoot, Root } from 'react-dom/client';
+
+import App from './App';
+
+import './index.css';
 
 const rootContainer = document.getElementById('root');
 
@@ -13,6 +17,8 @@ const root: Root = createRoot(rootContainer);
 
 root.render(
 	<StrictMode>
-		<App />
+		<ConfigProvider theme={{ cssVar: true }}>
+			<App />
+		</ConfigProvider>
 	</StrictMode>
 );

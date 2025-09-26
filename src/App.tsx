@@ -1,10 +1,16 @@
 import React from 'react';
 
+import { Flex, Layout } from 'antd';
+
+import Authentication from '@components/Authentication/Authentication';
+
 export function App() {
 	return (
-		<div>
-			<h1>Hello Vite + React!</h1>
-		</div>
+		<Layout style={{ minHeight: 'inherit' }}>
+			<Flex vertical align='center' justify='center' style={{ minHeight: 'inherit' }}>
+				<Authentication />
+			</Flex>
+		</Layout>
 	);
 }
 
