@@ -7,14 +7,14 @@
 		"fix": "npx eslint --fix"
 	},
 	"dependencies": {
-		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
+		"@reduxjs/toolkit": "^2.9.0",
 		"@types/node": "^24.5.2",
 		"ant-design": "^1.0.0",
 		"antd": "^5.27.4",
-		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"jiti": "^2.6.0",
 		"react": "^19.1.1",
-		"react-dom": "^19.1.1"
+		"react-dom": "^19.1.1",
+		"react-redux": "^9.2.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.36.0",
@@ -23,6 +23,7 @@
 		"@vitejs/plugin-react": "^5.0.3",
 		"eslint": "^9.36.0",
 		"eslint-plugin-react": "^7.37.5",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"globals": "^16.4.0",
 		"typescript-eslint": "^8.44.1",
 		"vite": "^7.1.7",

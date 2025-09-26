@@ -2,8 +2,10 @@ import React, { StrictMode } from 'react';
 
 import { ConfigProvider } from 'antd';
 import { createRoot, Root } from 'react-dom/client';
+import { Provider } from 'react-redux';
 
 import App from './App';
+import { store } from './redux/store';
 
 import './index.css';
 
@@ -17,8 +19,10 @@ const root: Root = createRoot(rootContainer);
 
 root.render(
 	<StrictMode>
-		<ConfigProvider theme={{ cssVar: true }}>
-			<App />
-		</ConfigProvider>
+		<Provider store={store}>
+			<ConfigProvider theme={{ cssVar: true }}>
+				<App />
+			</ConfigProvider>
+		</Provider>
 	</StrictMode>
 );
