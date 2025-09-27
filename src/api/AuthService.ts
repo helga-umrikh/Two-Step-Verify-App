@@ -7,7 +7,6 @@ export const AuthAPI = createApi({
 	reducerPath: 'AuthAPI',
 	baseQuery: graphqlRequestBaseQuery({ url: '/graphql' }),
 	endpoints: (builder) => ({
-		// отправляем email + pass - получаем challengeId
 		fetchPrimaryAuthStep: builder.mutation<
 			{ requires2FA: boolean; methods: string[]; challengeId: string },
 			TUserCredencials
@@ -26,7 +25,6 @@ export const AuthAPI = createApi({
 			}),
 		}),
 
-		//отправляем challengeId + code - получаем токены
 		fetchSecondaryAuthStep: builder.mutation<TUserTokens, TVerification>({
 			query: ({ challengeId, code }) => ({
 				document: `
