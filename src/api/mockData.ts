@@ -6,4 +6,6 @@ const UserDB = [
 	},
 ];
 
-export { UserDB };
+const VERIFICATION_CODE = 131311;
+
+export { UserDB, VERIFICATION_CODE };

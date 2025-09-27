@@ -1,6 +1,6 @@
 import { graphql, HttpResponse } from 'msw';
 
-import { UserDB } from './mockData';
+import { UserDB, VERIFICATION_CODE } from './mockData';
 import { generateToken, randomInt } from './utils';
 
 const challenges: Record<string, { code: number; userEmail: string }> = {};
@@ -17,10 +17,10 @@ export const handlers = [
 
 			if (isValidPassword) {
 				const challengeId = crypto.randomUUID();
-				const verificationCode = randomInt(0, 6);
+				// const verificationCode = randomInt(100000, 999999);
 
 				challenges[challengeId] = {
-					code: verificationCode,
+					code: VERIFICATION_CODE,
 					userEmail: email,
 				};
 
@@ -39,24 +39,32 @@ export const handlers = [
 		return HttpResponse.error();
 	}),
 
-	graphql.mutation('Verify-2fa', ({ variables }) => {
+	graphql.mutation('Verify2fa', ({ variables }) => {
 		const { challengeId, code } = variables;
 
 		if (challenges[challengeId]) {
-			if (challengeId[challengeId].code === code) {
+			if (challenges[challengeId].code === code) {
 				const accessToken = generateToken(32);
 				const refreshToken = generateToken(64);
 
-				return HttpResponse.json({
-					data: {
-						access_token: accessToken,
-						refresh_token: refreshToken,
-						user: {
-							id: 1,
-							email: challenges[challengeId].userEmail,
+				return HttpResponse.json(
+					{
+						data: {
+							access_token: accessToken,
+							refresh_token: refreshToken,
+							user: {
+								id: randomInt(10, 100),
+								email: challenges[challengeId].userEmail,
+								name: 'Emma',
+							},
 						},
 					},
-				});
+					{
+						headers: {
+							'Set-Cookie': `access_token=${accessToken}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=900`,
+						},
+					}
+				);
 			}
 
 			return HttpResponse.error();

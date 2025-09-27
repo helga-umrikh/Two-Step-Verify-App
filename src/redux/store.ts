@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { AuthAPI } from '../api/AuthService';
-import logInFormDataReducer from './slices/AuthSlice';
+import AuthDataSliceReducer from './slices/AuthSlice';
 
 export const store = configureStore({
 	reducer: {
-		authData: logInFormDataReducer,
+		authData: AuthDataSliceReducer,
 		[AuthAPI.reducerPath]: AuthAPI.reducer,
 	},
 

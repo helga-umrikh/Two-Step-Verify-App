@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 
 import { ConfigProvider } from 'antd';
 import { createRoot, Root } from 'react-dom/client';
@@ -21,17 +21,15 @@ const root: Root = createRoot(rootContainer);
 if (process.env.NODE_ENV === 'development') {
 	worker.start({
 		serviceWorker: {
-			url: '/mockServiceWorker.js', 
+			url: '/mockServiceWorker.js',
 		},
 	});
 }
 
 root.render(
-	<StrictMode>
-		<Provider store={store}>
-			<ConfigProvider theme={{ cssVar: true }}>
-				<App />
-			</ConfigProvider>
-		</Provider>
-	</StrictMode>
+	<Provider store={store}>
+		<ConfigProvider theme={{ cssVar: true }}>
+			<App />
+		</ConfigProvider>
+	</Provider>
 );

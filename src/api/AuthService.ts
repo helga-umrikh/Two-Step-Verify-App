@@ -28,8 +28,8 @@ export const AuthAPI = createApi({
 		fetchSecondaryAuthStep: builder.mutation<TUserTokens, TVerification>({
 			query: ({ challengeId, code }) => ({
 				document: `
-          mutation Verify-2fa($challengeId: String!, $code: Int!) {
-            verify-2fa(challengeId: $challengeId, code: $code) {
+          mutation Verify2fa($challengeId: String!, $code: Int!) {
+            verify2fa(challengeId: $challengeId, code: $code) {
               access_token
               refresh_token
               user {

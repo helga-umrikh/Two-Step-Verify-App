@@ -3,6 +3,13 @@ export enum ESTATUSCODE {
 	INVALID_CREDENCIALS = 401,
 }
 
+export enum EAuthStage {
+	UNAUTHORIZED = 'UNAUTHORIZED',
+	AUTHORIZED = 'AUTHORIZED',
+}
+
+
+
 export type TUserCredencials = {
 	email: string;
 	password: string;
@@ -10,11 +17,12 @@ export type TUserCredencials = {
 
 export type TVerification = {
 	challengeId: string;
-	code: string;
+	code: number;
 };
 
 export type TUserData = {
 	id: number;
+	name: string;
 	email: string;
 };
 

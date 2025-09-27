@@ -43,7 +43,7 @@ export const LogInForm = () => {
 	const [form] = Form.useForm();
 
 	if (!isLoading && data) {
-		dispatch(setAuthFormData({ primaryStep: { ...data } }));
+		dispatch(setAuthFormData(data));
 	}
 
 	if (isError) {
