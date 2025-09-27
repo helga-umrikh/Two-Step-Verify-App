@@ -9,8 +9,7 @@ import { prevStepButton } from './styles';
 
 import './styles.css';
 
-const Authentication = () => {
-
+const AuthenticationCard = () => {
 	return (
 		<Card className='auth-card'>
 			<Button type='text' icon={<ArrowLeftOutlined />} style={prevStepButton} />
@@ -22,4 +21,4 @@ const Authentication = () => {
 	);
 };
 
-export default Authentication;
+export default AuthenticationCard;

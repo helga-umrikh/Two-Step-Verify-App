@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Flex, Layout } from 'antd';
 
-import Authentication from '@components/Authentication/Authentication';
+import AuthenticationCard from '@components/Authentication/AuthenticationCard';
 
 export function App() {
 	return (
 		<Layout style={{ minHeight: 'inherit' }}>
 			<Flex vertical align='center' justify='center' style={{ minHeight: 'inherit' }}>
-				<Authentication />
+				<AuthenticationCard />
 			</Flex>
 		</Layout>
 	);

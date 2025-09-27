@@ -4,6 +4,7 @@ import { ConfigProvider } from 'antd';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
+import { worker } from './api/browser';
 import App from './App';
 import { store } from './redux/store';
 
@@ -16,6 +17,14 @@ if (!rootContainer) {
 	throw new Error('Root container not found');
 }
 const root: Root = createRoot(rootContainer);
+
+if (process.env.NODE_ENV === 'development') {
+	worker.start({
+		serviceWorker: {
+			url: '/mockServiceWorker.js', 
+		},
+	});
+}
 
 root.render(
 	<StrictMode>

@@ -1,33 +1,41 @@
 {
-	"scripts": {
-		"dev": "vite --config config/vite.config.dev.ts",
-		"build": "vite build",
-		"preview": "vite preview",
-		"lint": "npx eslint",
-		"fix": "npx eslint --fix"
-	},
-	"dependencies": {
-		"@reduxjs/toolkit": "^2.9.0",
-		"@types/node": "^24.5.2",
-		"ant-design": "^1.0.0",
-		"antd": "^5.27.4",
-		"jiti": "^2.6.0",
-		"react": "^19.1.1",
-		"react-dom": "^19.1.1",
-		"react-redux": "^9.2.0"
-	},
-	"devDependencies": {
-		"@eslint/js": "^9.36.0",
-		"@types/react": "^19.1.13",
-		"@types/react-dom": "^19.1.9",
-		"@vitejs/plugin-react": "^5.0.3",
-		"eslint": "^9.36.0",
-		"eslint-plugin-react": "^7.37.5",
-		"eslint-plugin-simple-import-sort": "^12.1.1",
-		"globals": "^16.4.0",
-		"typescript-eslint": "^8.44.1",
-		"vite": "^7.1.7",
-		"vite-plugin-eslint": "^1.8.1"
-	},
-	"template": "./src/index.html"
+  "scripts": {
+    "dev": "vite --config config/vite.config.dev.ts",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "npx eslint",
+    "fix": "npx eslint --fix"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
+    "@rtk-query/graphql-request-base-query": "^2.3.1",
+    "@types/node": "^24.5.2",
+    "ant-design": "^1.0.0",
+    "antd": "^5.27.4",
+    "graphql-request": "^7.2.0",
+    "jiti": "^2.6.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-redux": "^9.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.4.0",
+    "msw": "^2.11.3",
+    "typescript-eslint": "^8.44.1",
+    "vite": "^7.1.7",
+    "vite-plugin-eslint": "^1.8.1"
+  },
+  "template": "./src/index.html",
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
 }

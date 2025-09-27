@@ -2,9 +2,10 @@ import React from 'react';
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Form, Grid, Input, Typography } from 'antd';
+import { useDispatch } from 'react-redux';
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setLogInFormData } from '../../redux/slices/LogInFromSlice';
+import { useFetchPrimaryAuthStepMutation } from '../../api/AuthService';
+import { setAuthFormData } from '../../redux/slices/AuthSlice';
 import { titleLg, titleSm } from './styles';
 import { SubmitButton } from './SubmitButton';
 
@@ -18,12 +19,25 @@ type TFormValues = {
 
 export const LogInForm = () => {
 	const screens = useBreakpoint();
-	const dispatch = useAppDispatch();
-	const email = useAppSelector((state) => state.authData.email);
+	const dispatch = useDispatch();
+	const [fetchPrimaryAuthStep, { data, error, isLoading }] = useFetchPrimaryAuthStepMutation();
 
-	const onFinishForm = (values: TFormValues) => {
-		dispatch(setLogInFormData({ email: values.email, password: values.password }));
+	const onFinishForm = async (values: TFormValues) => {
+		try {
+			fetchPrimaryAuthStep(values).unwrap();
+		} catch (err) {
+			//!! вылывающее окно с ошибкой
+			console.error('Authorization error', err);
+		}
 	};
+
+	if (!isLoading && data) {
+		dispatch(setAuthFormData({ primaryStep: { ...data } }));
+	}
+
+	if (error) {
+		console.error(error);
+	}
 
 	const [form] = Form.useForm();
 
@@ -47,10 +61,7 @@ export const LogInForm = () => {
 					},
 				]}
 			>
-				<Input
-					placeholder='Email'
-					prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} value={email ?? undefined} />}
-				/>
+				<Input placeholder='Email' prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} />
 			</Form.Item>
 			<Form.Item name='password' rules={[{ required: true }]}>
 				<Input.Password

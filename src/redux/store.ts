@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import logInFormDataReducer from './slices/LogInFromSlice';
+import { AuthAPI } from '../api/AuthService';
+import logInFormDataReducer from './slices/AuthSlice';
 
 export const store = configureStore({
 	reducer: {
 		authData: logInFormDataReducer,
+		[AuthAPI.reducerPath]: AuthAPI.reducer,
 	},
+
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(AuthAPI.middleware),
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
