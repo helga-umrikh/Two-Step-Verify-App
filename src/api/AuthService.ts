@@ -1,27 +1,25 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
 
-import { TUserCredencials, TUserTokens, TVerification } from './types';
+import { TPrimaryLog, TUserCredencials, TUserTokens, TVerification } from './types';
 
 export const AuthAPI = createApi({
 	reducerPath: 'AuthAPI',
 	baseQuery: graphqlRequestBaseQuery({ url: '/graphql' }),
 	endpoints: (builder) => ({
-		fetchPrimaryAuthStep: builder.mutation<
-			{ requires2FA: boolean; methods: string[]; challengeId: string },
-			TUserCredencials
-		>({
-			query: ({ email, password }) => ({
+		fetchPrimaryAuthStep: builder.mutation<TPrimaryLog, TUserCredencials>({
+			query: ({ email, password, challengeId }) => ({
 				document: `
-          mutation Login($email: String!, $password: String!) {
-            login(email: $email, password: $password) {
+          mutation Login($email: String!, $password: String!, $challengeId: String) {
+        login(email: $email, password: $password, challengeId: $challengeId) {
               requires2FA
               methods
               challengeId
+              retryAfter
             }
           }
         `,
-				variables: { email, password },
+				variables: { email, password, challengeId },
 			}),
 		}),
 

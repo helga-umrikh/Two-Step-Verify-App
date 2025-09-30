@@ -8,16 +8,22 @@ export enum EAuthStage {
 	AUTHORIZED = 'AUTHORIZED',
 }
 
-
-
 export type TUserCredencials = {
 	email: string;
 	password: string;
+	challengeId?: string | null;
 };
 
 export type TVerification = {
 	challengeId: string;
 	code: number;
+};
+
+export type TPrimaryLog = {
+	challengeId: string;
+	methods: string[];
+	requires2FA: boolean;
+	retryAfter: string;
 };
 
 export type TUserData = {

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Form, Grid, Input, message, Spin, Typography } from 'antd';
 import { useDispatch } from 'react-redux';
 
 import { useFetchPrimaryAuthStepMutation } from '../../api/AuthService';
-import { setAuthFormData } from '../../redux/slices/AuthSlice';
+import { setAuthFormData, setAuthPrimaryStep } from '../../redux/slices/AuthSlice';
 import { titleLg, titleSm } from './styles';
-import { SubmitButton } from './SubmitButton';
+import { SubmitFormButton } from './SubmitButton';
 
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
@@ -17,9 +17,10 @@ type TFormValues = {
 	password: string;
 };
 
-export const LogInForm = () => {
+export const LogInForm: FC = () => {
 	const screens = useBreakpoint();
 	const [messageApi, contextHolder] = message.useMessage();
+	const [formData, setFormData] = useState<TFormValues | null>(null);
 	const dispatch = useDispatch();
 	const [fetchPrimaryAuthStep, { data, isLoading, isError }] = useFetchPrimaryAuthStepMutation();
 
@@ -33,6 +34,7 @@ export const LogInForm = () => {
 	const onFinishForm = async (values: TFormValues) => {
 		try {
 			fetchPrimaryAuthStep(values).unwrap();
+			setFormData(values);
 		} catch (err) {
 			console.error(err);
 			form.resetFields();
@@ -42,8 +44,9 @@ export const LogInForm = () => {
 
 	const [form] = Form.useForm();
 
-	if (!isLoading && data) {
-		dispatch(setAuthFormData(data));
+	if (!isLoading && data && formData) {
+		dispatch(setAuthPrimaryStep(data));
+		dispatch(setAuthFormData(formData));
 	}
 
 	if (isError) {
@@ -85,7 +88,7 @@ export const LogInForm = () => {
 					/>
 				</Form.Item>
 				<Form.Item shouldUpdate>
-					<SubmitButton form={form}>Log in</SubmitButton>
+					<SubmitFormButton form={form}>Log in</SubmitFormButton>
 				</Form.Item>
 			</Form>
 		</Spin>
